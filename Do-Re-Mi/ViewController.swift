@@ -17,20 +17,30 @@ class ViewController : UIViewController, UITableViewDataSource {
     let cellReuseIdentifier = "MyCellReuseIdentifier"
     
     // Choose some data to show in your table
-    let model : [String] = [
-        // TODO: Fill this array with data
+    let model = [
+        ["text" : "Do", "detail" : "A deer. A female deer."],
+        ["text" : "Re", "detail" : "A drop of golden sun."],
+        ["text" : "Mi", "detail" : "A name, I call myself."],
+        ["text" : "Fa", "detail" : "A long long way to run."],
+        ["text" : "So", "detail" : "A needle pulling thread."],
+        ["text" : "La", "detail" : "A note to follow So."],
+        ["text" : "Ti", "detail" : "A drink with jam and bread."]
     ]
     
     // MARK: UITableViewDataSource
     // Add the two essential table data source methods here
     func tableView (_ tableView : UITableView, numberOfRowsInSection section : Int) -> Int {
-        //TODO: Implement method to return the correct number of rows.
-        return 0
+        return self.model.count
     }
     
     func tableView (_ tableView : UITableView, cellForRowAt indexPath : IndexPath) -> UITableViewCell {
-        //TODO: Implement method to return cell with the correct reuseidentifier and populated with the correct data.
-        let placeholderCell = UITableViewCell ()
-        return placeholderCell
+        let cell = tableView.dequeueReusableCell (withIdentifier : self.cellReuseIdentifier)!
+        
+        let dictionary = self.model [(indexPath as NSIndexPath).row]
+        
+        cell.textLabel?.text = dictionary["text"]
+        cell.detailTextLabel?.text = dictionary["detail"]
+        
+        return cell
     }
 }
